@@ -8,7 +8,7 @@ import {
 } from "@gravity-ui/icons";
 import { motion } from "motion/react";
 
-export default function StatsSection() {
+const StatsSection = () => {
     const stats = [
         {
             id: 1,
@@ -36,12 +36,12 @@ export default function StatsSection() {
         },
     ];
 
-    // ফ্রেমার মোশনের জন্য কার্ড অ্যানিমেশন ভ্যারিয়েন্ট
+
     const containerVariants = {
         hidden: {},
         visible: {
             transition: {
-                staggerChildren: 0.15, // একটি কার্ডের পর আরেকটি কার্ড চমৎকার সিরিয়ালে আসবে
+                staggerChildren: 0.15, 
             },
         },
     };
@@ -62,7 +62,7 @@ export default function StatsSection() {
 
     return (
         <section className="relative overflow-hidden bg-black py-16 sm:py-24 lg:py-28 text-white">
-            {/* Background Globe - জুম-ইন অ্যানিমেশনসহ */}
+            {/* Background Globe  */}
             <motion.div
                 initial={{ scale: 1.1, opacity: 0 }}
                 animate={{ scale: 1, opacity: 0.8 }}
@@ -84,7 +84,8 @@ export default function StatsSection() {
                 
                 {/* Heading & Tags Section */}
                 <div className="mx-auto max-w-3xl text-center space-y-5">
-                    {/* হেডিং অ্যানিমেশন */}
+                    
+                    
                     <motion.h2 
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +144,7 @@ export default function StatsSection() {
                             {/* Card Glow Effect */}
                             <div className="absolute bottom-0 right-0 h-24 w-24 sm:h-32 sm:w-32 rounded-full bg-white/5 blur-2xl transition duration-300 group-hover:bg-violet-500/15" />
 
-                            {/* Icon Box - হোভার করলে মৃদু রোটেশন হবে */}
+                            {/* Icon Box */}
                             <motion.div 
                                 whileHover={{ rotate: 12, scale: 1.1 }}
                                 className="relative z-10 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-violet-400 transition-colors duration-300 group-hover:text-fuchsia-400 group-hover:border-violet-500/30"
@@ -167,3 +168,4 @@ export default function StatsSection() {
         </section>
     );
 }
+export default StatsSection;
