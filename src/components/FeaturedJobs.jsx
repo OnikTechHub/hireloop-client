@@ -98,7 +98,7 @@ const FeaturedJobs = () => {
     };
 
     return (
-        <section className="bg-[#050507] text-white py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <section className="bg-[#000000] text-white py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
             
             <div className="absolute top-[10%] left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-violet-600/[0.03] blur-[150px] pointer-events-none" />
 
