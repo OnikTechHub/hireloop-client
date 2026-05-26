@@ -5,7 +5,7 @@ import {
   LogoGithub,
 } from "@gravity-ui/icons";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="border-t border-white/10 bg-[#0B0B0F] text-white">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
@@ -146,3 +146,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;
