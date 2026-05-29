@@ -3,15 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Input, Button, Card } from "@heroui/react";
-import { Eye, EyeSlash } from "@gravity-ui/icons";
+import { TextField, Label, InputGroup, Input, Button, Card } from "@heroui/react";
+import { Eye, EyeSlash, ShieldKeyhole } from "@gravity-ui/icons";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function SignInPage() {
   const router = useRouter();
-  
+
   const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -21,11 +21,11 @@ export default function SignInPage() {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    
+
     try {
       setLoading(true);
       const { error } = await authClient.signIn.email({
-        email, 
+        email,
         password,
       });
 
@@ -33,7 +33,7 @@ export default function SignInPage() {
         toast.error(error.message || "Login failed!");
       } else {
         toast.success("Logged in successfully!");
-        router.push("/dashboard"); // আপনার ড্যাশবোর্ড বা হোমপেজ রাউট
+        router.push("/"); 
       }
     } catch (err) {
       toast.error("An unexpected error occurred.");
@@ -55,34 +55,38 @@ export default function SignInPage() {
         </div>
 
         <form onSubmit={handleSignIn} className="flex flex-col gap-4">
-          <Input 
-            required 
-            label="EMAIL ADDRESS" 
-            type="email" 
-            placeholder="name@example.com" 
-            variant="bordered" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-          />
-          
           <Input
             required
-            label="PASSWORD"
-            placeholder="Enter your password"
+            label="EMAIL ADDRESS"
+            type="email"
+            placeholder="name@example.com"
             variant="bordered"
-            type={isVisible ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            endContent={
-              <button 
-                type="button" 
-                onClick={(e) => { e.preventDefault(); toggleVisibility(); }} 
-                className="focus:outline-none text-xl p-2"
-              >
-                {isVisible ? <EyeSlash className="text-zinc-400" /> : <Eye className="text-zinc-400" />}
-              </button>
-            }
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
+
+          {/* Password Field */}
+          <TextField isRequired name="password" className="flex flex-col gap-1.5">
+            <Label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Password</Label>
+            <InputGroup className="flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 bg-zinc-50 dark:bg-zinc-900 focus-within:border-primary transition-colors">
+              <ShieldKeyhole className="text-zinc-400 pointer-events-none" size={16} />
+              <Input
+                type={isVisible ? "text" : "password"}
+                placeholder="Choose a password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-transparent py-2 text-sm outline-none border-none text-zinc-900 dark:text-zinc-100"
+              />
+              <button
+                className="focus:outline-none text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition"
+                type="button"
+                onClick={toggleVisibility}
+                aria-label="toggle password visibility"
+              >
+                {isVisible ? <EyeSlash size={18} /> : <Eye size={18} />}
+              </button>
+            </InputGroup>
+          </TextField>
 
           <Button type="submit" isLoading={loading} className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold h-12 mt-2">
             Log In →
@@ -99,10 +103,10 @@ export default function SignInPage() {
           <div className="flex-1 h-px bg-white/10" />
         </div>
 
-        <Button 
-            onClick={() => authClient.signIn.social({ provider: "google", callbackURL: "/dashboard" })}
-            className="w-full h-12 text-white font-semibold bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 border border-white/10 hover:bg-white/10 transition-all" 
-            startContent={<FcGoogle className="text-xl" />}
+        <Button
+          onClick={() => authClient.signIn.social({ provider: "google", callbackURL: "/dashboard" })}
+          className="w-full h-12 text-white font-semibold bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 border border-white/10 hover:bg-white/10 transition-all"
+          startContent={<FcGoogle className="text-xl" />}
         >
           Sign in with Google
         </Button>
