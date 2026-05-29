@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { LuCrown, LuTrendingUp, LuZap, LuPlus, LuArrowRight } from "react-icons/lu";
 
 const PricingSection = () => {
-    // মান্থলি বা ইয়ারলি প্ল্যান ট্র্যাক করার জন্য স্টেট
+    
     const [isYearly, setIsYearly] = useState(false);
 
     const plans = [
@@ -26,7 +26,8 @@ const PricingSection = () => {
         {
             id: "growth",
             name: "Growth",
-            price: isYearly ? 12 : 17, // ইয়ারলি সিলেক্ট করলে ডিসকাউন্টেড প্রাইস (চাইলে টিউন করতে পারেন)
+            price: isYearly ? 12 : 17, 
+            
             icon: <LuTrendingUp className="text-violet-400 h-5 w-5" />,
             features: [
                 "Daily AI match brief (top 5)",
@@ -35,7 +36,8 @@ const PricingSection = () => {
                 "1-click apply, unlimited"
             ],
             buttonText: "Choose This Plan",
-            isPopular: true // মাঝখানের কার্ডটি একটু হাইলাইটেড ও হোয়াইট বাটনের
+            isPopular: true 
+            
         },
         {
             id: "premium",
@@ -55,7 +57,7 @@ const PricingSection = () => {
 
     return (
         <section className="bg-[#000000] text-white py-20 sm:py-28 px-6 sm:px-12 lg:px-16 relative overflow-hidden">
-            {/* ব্যাকগ্রাউন্ড গ্লো ইফেক্ট */}
+            
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[450px] w-[500px] rounded-full bg-violet-600/[0.02] blur-[120px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative z-10">
@@ -108,9 +110,9 @@ const PricingSection = () => {
                                 : "border-white/[0.05] hover:border-white/[0.1]"
                             }`}
                         >
-                            {/* ভেতরের মূল কন্টেন্ট */}
+                            
                             <div>
-                                {/* কার্ড হেডার: আইকন এবং নাম */}
+                                
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="h-9 w-9 rounded-xl bg-[#1E1E22] border border-white/[0.05] flex items-center justify-center shadow-inner">
                                         {plan.icon}
@@ -120,7 +122,7 @@ const PricingSection = () => {
                                     </h3>
                                 </div>
 
-                                {/* প্রাইস সেকশন */}
+
                                 <div className="flex items-baseline gap-1 mb-8">
                                     <span className="text-4xl sm:text-5xl font-semibold tracking-tight">
                                         ${plan.price}
@@ -130,12 +132,12 @@ const PricingSection = () => {
                                     </span>
                                 </div>
 
-                                {/* ফিচার লিস্টের টাইটেল */}
+
                                 <p className="text-sm font-medium text-zinc-300 mb-5">
                                     Start building your insights hub:
                                 </p>
 
-                                {/* ফিচার বা বেনিফিটসমূহ */}
+
                                 <ul className="space-y-4 mb-8">
                                     {plan.features.map((feature, idx) => (
                                         <li key={idx} className="flex items-start gap-3 text-[14px] text-zinc-400 leading-relaxed">
@@ -148,7 +150,7 @@ const PricingSection = () => {
                                 </ul>
                             </div>
 
-                            {/* অ্যাকশন বাটন */}
+
                             <button
                                 className={`w-full py-3.5 px-4 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all duration-300 ${
                                     plan.isPopular
