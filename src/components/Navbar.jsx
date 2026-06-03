@@ -13,8 +13,10 @@ const Navbar = () => {
   const { data: session, isPending } = useSession();
   const user = session?.user;
 
-  const handleSignOut = async () => {
-    await signOut();
+  const handleSignOut =  async () => {
+    await signOut(); 
+    router.push("/"); 
+    router.refresh(); 
   };
 
   const navLinks = [
@@ -76,8 +78,7 @@ const Navbar = () => {
                   <span className="text-sm text-gray-300">Hi, {user.name}!</span>
                   <Button 
                     onClick={handleSignOut}
-                    variant="ghost"
-                    className="text-white hover:bg-white/10"
+                    className="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold shadow-md shadow-violet-500/20 hover:opacity-90"
                   >
                     Sign Out
                   </Button>

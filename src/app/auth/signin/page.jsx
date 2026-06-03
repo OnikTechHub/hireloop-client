@@ -104,7 +104,7 @@ export default function SignInPage() {
         </div>
 
         <Button
-          onClick={() => authClient.signIn.social({ provider: "google", callbackURL: "/dashboard" })}
+          onClick={() => authClient.signIn.social({ provider: "google", callbackURL: "/" })}
           className="w-full h-12 text-white font-semibold bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 border border-white/10 hover:bg-white/10 transition-all"
           startContent={<FcGoogle className="text-xl" />}
         >

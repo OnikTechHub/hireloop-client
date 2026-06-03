@@ -3,11 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { TextField, Label, InputGroup, Input, Button, Card } from "@heroui/react";
+import { Description, Label, Radio, RadioGroup, TextField, InputGroup, Input, Button, Card } from "@heroui/react";
 import { Eye, EyeSlash, ShieldKeyhole } from "@gravity-ui/icons";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
 import toast, { Toaster } from "react-hot-toast";
+
+
 export default function SignUpPage() {
   const router = useRouter();
 
@@ -19,6 +21,8 @@ export default function SignUpPage() {
   const [password, setPassword] = useState("");
 
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  const [role, setRole] = useState("seeker")
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -35,14 +39,14 @@ export default function SignUpPage() {
     try {
       setLoading(true);
       const { error } = await authClient.signUp.email({
-        email, password, name, image: photoUrl,
+        email, password, name, role, image: photoUrl, 
       });
 
       if (error) {
         toast.error(error.message || "Registration failed!");
       } else {
         toast.success("Account Created Successfully!");
-        router.push("/login");
+        router.push("/signin");
       }
     } catch (err) {
       toast.error("An unexpected error occurred.");
@@ -91,6 +95,30 @@ export default function SignUpPage() {
             </InputGroup>
             <p className="text-sm text-zinc-400">Must be at least 8 characters with 1 uppercase and 1 number</p>
           </TextField>
+
+          {/* role */}
+          <div className="flex flex-col gap-4">
+            <Label>Subscription plan</Label>
+            <RadioGroup defaultValue="Job Seeker" name="role" onChange={value => setRole(value)} orientation="horizontal">
+              <Radio value="Job Seeker">
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label>Job Seeker</Label>
+                </Radio.Content>
+              </Radio>
+              <Radio value="Recruiter">
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label>Recruiter</Label>
+                </Radio.Content>
+              </Radio>
+             
+            </RadioGroup>
+          </div>
 
           <Button type="submit" isLoading={loading} className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold h-12 mt-2">
             Sign Up →
